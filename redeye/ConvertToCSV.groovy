@@ -1,6 +1,9 @@
 import groovy.json.JsonSlurper
 import org.codehaus.groovy.grails.web.json.JSONObject
 
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
 /**
  * Created with IntelliJ IDEA.
  * User: guy.muff
@@ -17,12 +20,17 @@ String readline = r.readLine()
 
 FileWriter w = new FileWriter('ratings.csv')
 
-while(readline) {
-    JSONObject root = slurper.parseText(readline)
-        String line = "${root['AuthorId']},${root['ProductId']},${root['Rating']}\n"
-        w.write(line)
+//LastModificationTime=2012-05-31T05:19:56.000+00:00
+DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
 
-        readline = r.readLine()
+while (readline) {
+    JSONObject root = slurper.parseText(readline)
+
+    Date lastModified = format.parse(root.LastModificationTime)
+    String line = "${root['AuthorId']},${root['ProductId']},${root['Rating']},${lastModified.time}\n"
+    w.write(line)
+
+    readline = r.readLine()
 
 }
 
