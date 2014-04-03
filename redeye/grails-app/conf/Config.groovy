@@ -69,6 +69,9 @@ environments {
     }
 }
 
+mahout.recommender.data.model = 'file'
+mahout.recommender.data.file = ''
+
 // log4j configuration
 log4j = {
     // Example of changing the log pattern for the default console appender:
@@ -89,3 +92,6 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+// Added by the Mahout Recommender plugin:
+mahout.recommender.mode = 'input'  // 'input', 'config' or 'class'
