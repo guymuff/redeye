@@ -84,14 +84,19 @@ class ImportDataService {
                 Product product = Product.findByProduct_id(root.ProductId)
                 if (author && product) {
                     Date responseTime = null
+                    String response = null
+                    String responseName = null
                     if (root.ClientResponses?.Date)
                         responseTime = format.parse(root.ClientResponses?.Date)
+                    if (root.ClientResponses?.Response)
+                        response = root.ClientResponses?.Response
+                    if (root.ClientResponses?.Name)
+                        responseName = root.ClientResponses?.Name
                     Date submissionTime = format.parse(root.SubmissionTime)
-                    Review review = new Review( author: author, product: product,
+                    Review review = new Review( author: author, product: product,review: root.ReviewText,
                             rating: root.Rating, ratingRange: root.RatingRange,
                             submissionTime: submissionTime, responseTime: responseTime,
-                            response: root?.ClientResponses?.Response, responserName: root?.ClientResponses?.Name,
-
+                            response: response, responserName: responseName
                     ).save()
                 }
 

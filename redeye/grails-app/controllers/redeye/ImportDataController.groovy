@@ -10,6 +10,8 @@ class ImportDataController {
 
     def importAuthor() {
         importDataService.importAuthor()
+        importDataService.importProduct()
+        importDataService.importReview()
         render text: 'OK'
     }
 
