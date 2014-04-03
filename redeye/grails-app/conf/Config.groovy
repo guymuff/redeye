@@ -68,10 +68,6 @@ environments {
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }
-
-mahout.recommender.data.model = 'file'
-mahout.recommender.data.file = ''
-
 // log4j configuration
 log4j = {
     // Example of changing the log pattern for the default console appender:
@@ -95,3 +91,4 @@ log4j = {
 
 // Added by the Mahout Recommender plugin:
 mahout.recommender.mode = 'input'  // 'input', 'config' or 'class'
+mahout.recommender.data.file = 'data.csv'
