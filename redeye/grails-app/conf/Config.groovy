@@ -92,4 +92,4 @@ log4j = {
 
 // Added by the Mahout Recommender plugin:
 mahout.recommender.mode = 'input'  // 'input', 'config' or 'class'
-mahout.recommender.data.file = 'ratings.csv'
+mahout.recommender.data.file = 'data.csv'
