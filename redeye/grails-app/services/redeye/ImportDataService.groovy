@@ -10,6 +10,7 @@ class ImportDataService {
 
     static String AUTHOR_TEXT = 'dove/authors.txt'
     static String PRODUCT_TEXT = 'dove/products.txt'
+    static String REVIEW_TEXT = 'dove/reviews.txt'
 
     def importAuthor() {
         if (Author.findAll().size() == 0) {
@@ -31,7 +32,7 @@ class ImportDataService {
                 readline = r.readLine()
             }
 
-
+            log.info Author.getAll().size()+" authors imported !!"
         }
     }
 
@@ -69,8 +70,35 @@ class ImportDataService {
         }
     }
 
-    def addAuthor() {
-        Author newAuthor = new Author(idString: 'test')
-        newAuthor.save(flush: true)
+    def importReview() {
+        if (Review.findAll().size() == 0) {
+            JsonSlurper slurper = new JsonSlurper()
+            Reader r = new FileReader(REVIEW_TEXT)
+            String readline = r.readLine()
+
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+            while(readline) {
+                JSONObject root = slurper.parseText(readline)
+
+                Author author = Author.findByIdString(root.AuthorId)
+                Product product = Product.findByProduct_id(root.ProductId)
+                if (author && product) {
+                    Date responseTime = null
+                    if (root.ClientResponses?.Date)
+                        responseTime = format.parse(root.ClientResponses?.Date)
+                    Date submissionTime = format.parse(root.SubmissionTime)
+                    Review review = new Review( author: author, product: product,
+                            rating: root.Rating, ratingRange: root.RatingRange,
+                            submissionTime: submissionTime, responseTime: responseTime,
+                            response: root?.ClientResponses?.Response, responserName: root?.ClientResponses?.Name,
+
+                    ).save()
+                }
+
+                readline = r.readLine()
+            }
+
+            log.info Review.getAll().size()+" reviews imported !!"
+        }
     }
 }
