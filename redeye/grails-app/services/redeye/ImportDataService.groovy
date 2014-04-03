@@ -16,7 +16,6 @@ class ImportDataService {
             Reader r = new FileReader(AUTHOR_TEXT)
             String readline = r.readLine()
 
-            int i = 20
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
             while(readline) {
                 JSONObject root = slurper.parseText(readline)
@@ -27,11 +26,7 @@ class ImportDataService {
                         gender: root?.ContextDataValues?.Gender?.Value, location: root['Location'],
                         lastModeratedTime: lastModified, submissionTime: submissionTime
                 ).save()
-                i--
-                //String line = "${root['Id']},${root?.ContextDataValues?.Gender?.Value},${root['Location']}"
-                //println line
-                if(i==0)
-                    break
+
                 readline = r.readLine()
             }
 
