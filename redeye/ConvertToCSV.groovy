@@ -1,5 +1,6 @@
 import groovy.json.JsonSlurper
 import org.codehaus.groovy.grails.web.json.JSONObject
+import redeye.Author
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -26,12 +27,16 @@ DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
 while (readline) {
     JSONObject root = slurper.parseText(readline)
 
-    Date lastModified = format.parse(root.LastModificationTime)
-    String line = "${root['AuthorId']},${root['ProductId']},${root['Rating']},${lastModified.time}\n"
-    w.write(line)
+    Author author = Author.findByIdString(root['AuthorId'])
+
+    if(author) {
+        Date lastModified = format.parse(root.LastModificationTime)
+        String line = "${author.id},${root['ProductId']},${root['Rating']},${lastModified.time}\n"
+        w.write(line)
+    }
+
 
     readline = r.readLine()
-
 }
 
 
