@@ -5,6 +5,7 @@ class ImportDataController {
     def importDataService
 
     def index() {
+        render text: 'OK'
     }
 
     def importAuthor() {

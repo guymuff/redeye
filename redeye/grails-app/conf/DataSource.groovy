@@ -18,7 +18,7 @@ environments {
             driverClassName = "org.postgresql.Driver"
             dialect = "org.hibernate.dialect.PostgreSQLDialect"
             username = "redeye"
-            dbCreate = ""
+            dbCreate = "update"
 
             url = "jdbc:postgresql://localhost:5432/redeye"
         }

@@ -3,6 +3,9 @@ package redeye
 import groovy.json.JsonSlurper
 import org.codehaus.groovy.grails.web.json.JSONObject
 
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+
 class ImportDataService {
 
     static String AUTHOR_TEXT = 'dove/authors.txt'
@@ -13,20 +16,26 @@ class ImportDataService {
             Reader r = new FileReader(AUTHOR_TEXT)
             String readline = r.readLine()
 
+            int i = 20
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
             while(readline) {
                 JSONObject root = slurper.parseText(readline)
 
-                Author author = new Author(nickName: root['nickName'], idString: root['Id'],
+                Date lastModified = format.parse(root.LastModeratedTime)
+                Date submissionTime = format.parse(root.SubmissionTime)
+                Author author = new Author(nickName: root['UserNickname'], idString: root['Id'],
                         gender: root?.ContextDataValues?.Gender?.Value, location: root['Location'],
-                        lastModeratedTime: root['LastModeratedTime'], submissionTime: root['SubmissionTime']
+                        lastModeratedTime: lastModified, submissionTime: submissionTime
                 ).save()
-
+                i--
                 //String line = "${root['Id']},${root?.ContextDataValues?.Gender?.Value},${root['Location']}"
                 //println line
-
+                if(i==0)
+                    break
                 readline = r.readLine()
-
             }
+
+
         }
     }
 
@@ -37,5 +46,10 @@ class ImportDataService {
         authors.each {
             println it.id + ',' + it.nickName
         }
+    }
+
+    def addAuthor() {
+        Author newAuthor = new Author(idString: 'test')
+        newAuthor.save(flush: true)
     }
 }

@@ -9,4 +9,9 @@ class Author {
 
     Date lastModeratedTime
     Date submissionTime
+
+    static constraints = {
+        gender nullable: true
+        location nullable: true
+    }
 }
