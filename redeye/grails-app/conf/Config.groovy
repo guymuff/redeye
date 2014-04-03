@@ -68,7 +68,6 @@ environments {
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }
-
 // log4j configuration
 log4j = {
     // Example of changing the log pattern for the default console appender:
