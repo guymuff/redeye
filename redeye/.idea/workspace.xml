@@ -110,10 +110,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BuildConfig.groovy" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="BuildConfig.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="53" selection-start="1837" selection-end="1837" vertical-scroll-proportion="0.0">
+            <state line="59" column="31" selection-start="2318" selection-end="2318" vertical-scroll-proportion="1.127321">
               <folding />
             </state>
           </provider>
@@ -122,7 +122,7 @@
       <file leaf-file-name="ImportDataController.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/redeye/ImportDataController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="14" selection-start="96" selection-end="96" vertical-scroll-proportion="-0.8888889">
+            <state line="9" column="20" selection-start="106" selection-end="118" vertical-scroll-proportion="-2.6666667">
               <folding />
             </state>
           </provider>
@@ -146,10 +146,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataSource.groovy" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DataSource.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="35" selection-start="745" selection-end="745" vertical-scroll-proportion="0.06366048">
+            <state line="22" column="35" selection-start="745" selection-end="745" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -542,7 +542,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="790" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -738,20 +738,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="53" selection-start="1837" selection-end="1837" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/redeye/ImportDataController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="14" selection-start="96" selection-end="96" vertical-scroll-proportion="-0.8888889">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/importData/listAuthor.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="12" selection-start="217" selection-end="217" vertical-scroll-proportion="-0.8666667">
@@ -761,7 +747,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/conf/DataSource.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="35" selection-start="745" selection-end="745" vertical-scroll-proportion="0.06366048">
+        <state line="22" column="35" selection-start="745" selection-end="745" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/redeye/ImportDataController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="20" selection-start="106" selection-end="118" vertical-scroll-proportion="-2.6666667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/BuildConfig.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="31" selection-start="2318" selection-end="2318" vertical-scroll-proportion="1.127321">
           <folding />
         </state>
       </provider>
