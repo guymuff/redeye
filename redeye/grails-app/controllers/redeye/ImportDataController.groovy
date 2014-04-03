@@ -9,9 +9,11 @@ class ImportDataController {
 
     def importAuthor() {
         importDataService.importAuthor()
+        render text: 'OK'
     }
 
     def listAuthor() {
         importDataService.listAllAuthorNameAndId()
+        render text: 'OK'
     }
 }

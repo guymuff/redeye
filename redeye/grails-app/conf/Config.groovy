@@ -92,3 +92,5 @@ log4j = {
 // Added by the Mahout Recommender plugin:
 mahout.recommender.mode = 'input'  // 'input', 'config' or 'class'
 mahout.recommender.data.file = 'data.csv'
+
+grails.gorm.failOnError = true

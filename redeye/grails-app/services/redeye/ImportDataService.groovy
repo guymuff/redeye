@@ -5,7 +5,7 @@ import org.codehaus.groovy.grails.web.json.JSONObject
 
 class ImportDataService {
 
-    static String AUTHOR_TEXT = '/Users/yi-ju.chung/Downloads/dove/authors.txt'
+    static String AUTHOR_TEXT = 'dove/authors.txt'
 
     def importAuthor() {
         if (Author.findAll().size() == 0) {
