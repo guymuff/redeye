@@ -9,45 +9,39 @@
 <body>
 
 <h1 style="padding-left: 1em; padding-top: 1em; font-size: 40px">Recommended Products</h1>
+<div style="padding-left: 2.3em; padding-bottom: 1em; font-size: 18px">
+    <p class="pr-review-author-name">Recommendation for User:&nbsp;<span>${input_user.nickName}</span></p>
+    <p class="pr-review-author-location">from <span>${input_user.location}</span></p>
+</div>
 
 <div class="pr-contents-wrapper">
 
     <ul>
         <g:each var="recommendProduct" in="${productbundle}">
-
-
-        %{--
-    <% for (var review_index = 0; review_index < reviews.length; review_index++) {
-    var review = reviews[review_index];
-    var groupSet = {};
-    var hasOtherAttributes = false;
-    if (review.g) {
-        for (var i = 0; i < review.g.length; i++) {
-            var key = review.g[i].k;
-            groupSet[key] = true;
-            hasOtherAttributes = hasOtherAttributes || (key != 'pros' && key != 'cons' && key != 'bestuses' && key != 'describeyourself');
-        }
-    }%>
-    --}%
             <div class="pr-review-wrap">
                 <div class="pr-review-wrap">
                     <div class="pr-review-rating-wrapper">
                         <div class="everyone_review">
-                            <div class="pr-review-author-date" style="max-width:20%"><span style="font-size: x-large;">${recommendProduct.overall_rating}/${recommendProduct.rating_range}</span> Over All</div>
+                            <div class="pr-review-author-date" style="max-width:25%"><span style="font-size: x-large;">${recommendProduct.overall_rating}/${recommendProduct.rating_range}</span> Over All</div>
                         </div>
                         <div class="targeted_review">
-                            <div class="pr-review-author-date" style="max-width:20%"><span style="font-size: x-large;font-weight: bold">${recommendProduct.personalized_rating}/${recommendProduct.rating_range}</span> Focused</div>
+                            <div class="pr-review-author-date" style="max-width:25%"><span style="font-size: x-large;font-weight: bold">${recommendProduct.personalized_rating}/${recommendProduct.rating_range}</span> Focused</div>
                         </div>
                         <div class="pr-review-rating">
                             <div class="pr-stars pr-stars-small pr-stars-4-sm" style="background-position: 0px -144px;" title="That's good stuff">&nbsp;</div>
-                            <p class="pr-review-rating-headline">${recommendProduct.product_name}</p>
+
                         </div>
                     </div>
                     <div class="pr-review-author">
-                        <div class="pr-review-author-info-wrapper">
-                            <r:img uri="${recommendProduct.image_url}" alt="${recommendProduct.product_name}" height="280"/>
+                        <div class="pr-review-author-info-wrapper" style="padding-left: 15%">
+                            <r:img uri="${recommendProduct.image_url}" alt="${recommendProduct.product_name}" height="200"/>
                             <p class="pr-review-author-name">By&nbsp;<span>${recommendProduct.author}</span></p>
-                            <p class="pr-review-author-location">from <span>${recommendProduct.author_location}</span></p>
+                            <g:if test="${recommendProduct.author_location}">
+                                <p class="pr-review-author-location">from <span>${recommendProduct.author_location}</span></p>
+                            </g:if>
+                            <g:if test="${recommendProduct.author_gender}">
+                                <p class="pr-review-author-location">gender <span>${recommendProduct.author_gender}</span></p>
+                            </g:if>
                         </div>
                     </div>
                     <div class="pr-review-main-wrapper">
