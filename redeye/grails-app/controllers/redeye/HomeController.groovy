@@ -34,7 +34,6 @@ class HomeController {
     }
 
     class ProductBundle {
-        ProductBundle
 
     }
 
