@@ -7,4 +7,6 @@ databaseChangeLog = {
 	include file: 'mike.xml'
 
 	include file: 'review.xml'
+
+	include file: 'del.xml'
 }

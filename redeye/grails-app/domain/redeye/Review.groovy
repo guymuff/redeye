@@ -9,14 +9,4 @@ class Review {
 
     String review
     Date submissionTime
-
-    String response
-    Date responseTime
-    String responserName
-
-    static constraints = {
-        response nullable: true
-        responseTime nullable: true
-        responserName nullable: true
-    }
 }
