@@ -1,122 +1,71 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="layout" content="main"/>
-		<title>Welcome to Grails</title>
-		<style type="text/css" media="screen">
-			#status {
-				background-color: #eee;
-				border: .2em solid #fff;
-				margin: 2em 2em 1em;
-				padding: 1em;
-				width: 12em;
-				float: left;
-				-moz-box-shadow: 0px 0px 1.25em #ccc;
-				-webkit-box-shadow: 0px 0px 1.25em #ccc;
-				box-shadow: 0px 0px 1.25em #ccc;
-				-moz-border-radius: 0.6em;
-				-webkit-border-radius: 0.6em;
-				border-radius: 0.6em;
-			}
+<head>
+    <meta name="layout" content="main"/>
+    <title></title>
+    <r:require module="recommends"/>
+</head>
 
-			.ie6 #status {
-				display: inline; /* float double margin fix http://www.positioniseverything.net/explorer/doubled-margin.html */
-			}
+<body>
 
-			#status ul {
-				font-size: 0.9em;
-				list-style-type: none;
-				margin-bottom: 0.6em;
-				padding: 0;
-			}
+<h1 style="padding-left: 1em">Recommended Products</h1>
 
-			#status li {
-				line-height: 1.3;
-			}
+<div class="pr-contents-wrapper">
 
-			#status h1 {
-				text-transform: uppercase;
-				font-size: 1.1em;
-				margin: 0 0 0.3em;
-			}
-
-			#page-body {
-				margin: 2em 1em 1.25em 18em;
-			}
-
-			h2 {
-				margin-top: 1em;
-				margin-bottom: 0.3em;
-				font-size: 1em;
-			}
-
-			p {
-				line-height: 1.5;
-				margin: 0.25em 0;
-			}
-
-			#controller-list ul {
-				list-style-position: inside;
-			}
-
-			#controller-list li {
-				line-height: 1.3;
-				list-style-position: inside;
-				margin: 0.25em 0;
-			}
-
-			@media screen and (max-width: 480px) {
-				#status {
-					display: none;
-				}
-
-				#page-body {
-					margin: 0 1em 1em;
-				}
-
-				#page-body h1 {
-					margin-top: 0;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="status" role="complementary">
-			<h1>Application Status</h1>
-			<ul>
-				<li>App version: <g:meta name="app.version"/></li>
-				<li>Grails version: <g:meta name="app.grails.version"/></li>
-				<li>Groovy version: ${GroovySystem.getVersion()}</li>
-				<li>JVM version: ${System.getProperty('java.version')}</li>
-				<li>Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</li>
-				<li>Controllers: ${grailsApplication.controllerClasses.size()}</li>
-				<li>Domains: ${grailsApplication.domainClasses.size()}</li>
-				<li>Services: ${grailsApplication.serviceClasses.size()}</li>
-				<li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>
-			</ul>
-			<h1>Installed Plugins</h1>
-			<ul>
-				<g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
-					<li>${plugin.name} - ${plugin.version}</li>
-				</g:each>
-			</ul>
-		</div>
-		<div id="page-body" role="main">
-			<h1>Welcome to Grails</h1>
-			<p>Congratulations, you have successfully started your first Grails application! At the moment
-			   this is the default page, feel free to modify it to either redirect to a controller or display whatever
-			   content you may choose. Below is a list of controllers that are currently deployed in this application,
-			   click on each to execute its default action:</p>
-
-			<div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
-				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-					</g:each>
-				</ul>
-			</div>
-		</div>
-	</body>
+%{--
+<% for (var review_index = 0; review_index < reviews.length; review_index++) {
+var review = reviews[review_index];
+var groupSet = {};
+var hasOtherAttributes = false;
+if (review.g) {
+    for (var i = 0; i < review.g.length; i++) {
+        var key = review.g[i].k;
+        groupSet[key] = true;
+        hasOtherAttributes = hasOtherAttributes || (key != 'pros' && key != 'cons' && key != 'bestuses' && key != 'describeyourself');
+    }
+}
+%>
+--}%
+<div class="pr-review-wrap">
+    <div class="pr-review-wrap">
+        <div class="pr-review-rating-wrapper">
+            <div class="everyone_review">
+                <div class="pr-review-author-date" style="max-width:20%"><span style="font-size: x-large;">3.5 ${everyone_rating}/ 5.0</span> Over All</div>
+            </div>
+            <div class="targeted_review">
+                <div class="pr-review-author-date" style="max-width:20%"><span style="font-size: x-large;">4.5 ${everyone_rating}/ 5.0</span> Focused</div>
+            </div>
+            <div class="pr-review-rating">
+                <div class="pr-stars pr-stars-small pr-stars-4-sm" style="background-position: 0px -144px;" title="That's good stuff">&nbsp;</div>
+                <p class="pr-review-rating-headline">This is the review title ${review_title}</p>
+            </div>
+        </div>
+        <div class="pr-review-author">
+            <div class="pr-review-author-info-wrapper">
+                <r:img uri="http://ecx.images-amazon.com/images/I/71zV4cbdXcL._SL1500_.jpg"
+                       alt="ABC" height="280"/>
+                <p class="pr-review-author-name">By&nbsp;<span>SOMEONE ${author}</span></p>
+                <p class="pr-review-author-location">from <span>CA ${author_location}</span></p>
+            </div>
+        </div>
+        <div class="pr-review-main-wrapper">
+            <div class="pr-review-text">
+                <p class="pr-comments-header">Comments about <em><span class="pr-product-name">This is product name ${product_name}</span></em>:</p>
+            </div>
+            <div class="pr-review-footer">
+                <div class="pr-review-tools">
+                    <p class="pr-review-helpful-text">Was this review helpful?&nbsp;
+                        <a data-pr-event="review-helpful-yes-link" class="pr-review-helpful-text-link" href="#" onclick="POWERREVIEWS.display.submitHelpfulVote('42755281', 'helpful', 'en_US', POWERREVIEWS.common.getOptions('engine-1-en_US')); return false;">Yes</a>&nbsp;/&nbsp;
+                        <a data-pr-event="review-helpful-no-link" class="pr-review-helpful-text-link" href="#" onclick="POWERREVIEWS.display.submitHelpfulVote('42755281', 'unhelpful', 'en_US', POWERREVIEWS.common.getOptions('engine-1-en_US')); return false;">No</a></p>
+                    <p class="pr-review-report-issue"><span class="pr-review-report-issue-hyphen">&nbsp;-&nbsp;</span>You may also
+                        <a href="#" data-pr-event="review-report-issue-link" class="pr-review-helpful-text-link" onclick="POWERREVIEWS.display.launchErrorDiv('42755281', 'en_US', 'engine-1-en_US', POWERREVIEWS.common.getOptions('engine-1-en_US')); return false;">flag this review</a>
+                    </p>
+                    <div class="pr-error" id="error_div42755281" style=""></div>
+                    <p class="pr-review-helpful-response" id="review_feedback42755281"></p>
+                </div>
+            </div></div>
+        <div class="pr-clear"></div>
+        <div class="pr-clear"></div>
+    </div>
+</body>
 </html>
