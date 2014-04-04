@@ -6,6 +6,7 @@ import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender
 import org.apache.mahout.cf.taste.impl.similarity.EuclideanDistanceSimilarity
 import org.apache.mahout.cf.taste.model.DataModel
 import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood
+import org.apache.mahout.cf.taste.recommender.RecommendedItem
 import org.apache.mahout.cf.taste.recommender.UserBasedRecommender
 import org.apache.mahout.cf.taste.similarity.UserSimilarity
 import org.apache.tools.ant.taskdefs.Classloader
@@ -27,5 +28,24 @@ class RecommenderService {
         return recommender.mostSimilarUserIDs(authorId, numOfSimilarAuthors)
     }
 
+    float starRatingEstimate(long authorID, long productID) {
+        return recommender.estimatePreference(authorID, productID)
+    }
 
+    ProductRecommendation[] recommendProducts(long authorID, int howMany) {
+        List<RecommendedItem> ris = recommender.recommend(authorID, howMany)
+
+        ProductRecommendation[] ret = new ProductRecommendation[ris.size()]
+        int i = 0
+        for(RecommendedItem ri : ris) {
+            ret[i++] = new ProductRecommendation(productID: ri.itemID, starRatingEstimate: ri.value)
+        }
+
+        return ret
+    }
+
+    class ProductRecommendation {
+        long productID
+        float starRatingEstimate
+    }
 }
