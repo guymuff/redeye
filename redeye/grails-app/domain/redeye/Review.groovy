@@ -9,4 +9,8 @@ class Review {
 
     String review
     Date submissionTime
+
+    static mapping = {
+        review type: 'text', sqlType: 'text'
+    }
 }

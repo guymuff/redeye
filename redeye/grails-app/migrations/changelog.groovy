@@ -5,4 +5,6 @@ databaseChangeLog = {
 	}
 
 	include file: '1.xml'
+
+	include file: '2.xml'
 }
