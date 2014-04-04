@@ -52,7 +52,7 @@
                     </div>
                     <div class="pr-review-main-wrapper">
                         <div class="pr-review-text">
-                            <p class="pr-comments-header"> ${recommendProduct.review} <em><span class="pr-product-name"></span></em>:</p>
+                            <p class="pr-comments-header"> ${recommendProduct.review} <em><span class="pr-product-name"></span></em></p>
                         </div>
                         <div class="pr-review-footer">
                             <div class="pr-review-tools">
