@@ -6,12 +6,6 @@ import redeye.Product
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
-/**
- * Created with IntelliJ IDEA.
- * User: guy.muff
- * Date: 4/3/14
- * Time: 7:30 AM
- */
 
 def REVIEWS_PATH = '/Users/guy.muff/Downloads/dove/reviews.txt'
 
@@ -31,15 +25,6 @@ while (readline) {
     Author author = Author.findByIdString(root['AuthorId'])
     Product product = Product.findByProduct_id(root['ProductId'])
 
-    if (!author) {
-
-        Date submissionTime = format.parse(root['SubmissionTime'])   // TODO this not 100% accurate in some cases
-        Date moderatedTime = format.parse(root['LastModeratedTime'])
-        author = new Author(idString: root['AuthorId'], nickName: root['AuthorId'],
-                lastModeratedTime: moderatedTime, submissionTime: submissionTime)
-
-        author.save()
-    }
     if (product) {
         Date lastModified = format.parse(root.LastModificationTime)
         String line = "${author.id},${product.id},${root['Rating']},${lastModified.time}\n"
