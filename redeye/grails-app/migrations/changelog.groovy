@@ -4,9 +4,5 @@ databaseChangeLog = {
 		// TODO add changes and preconditions here
 	}
 
-	include file: 'mike.xml'
-
-	include file: 'review.xml'
-
-	include file: 'del.xml'
+	include file: '1.xml'
 }
