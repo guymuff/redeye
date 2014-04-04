@@ -7,8 +7,8 @@ class Product {
     String image_url
     String product_url
     String category_id
-    BigInteger overall_rating
-    BigInteger rating_range
+    Integer overall_rating
+    Integer rating_range
     String product_id
 
 

@@ -32,7 +32,7 @@ class ImportDataService {
                 readline = r.readLine()
             }
 
-            log.info Author.getAll().size()+" authors imported !!"
+            println Author.getAll().size()+" authors imported !!"
         }
     }
 
@@ -77,28 +77,29 @@ class ImportDataService {
             String readline = r.readLine()
 
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+            int i = 0
             while(readline) {
                 JSONObject root = slurper.parseText(readline)
 
                 Author author = Author.findByIdString(root.AuthorId)
                 Product product = Product.findByProduct_id(root.ProductId)
-                if (author && product) {
-                    Date responseTime = null
-                    if (root.ClientResponses?.Date)
-                        responseTime = format.parse(root.ClientResponses?.Date)
-                    Date submissionTime = format.parse(root.SubmissionTime)
-                    Review review = new Review( author: author, product: product,
-                            rating: root.Rating, ratingRange: root.RatingRange,
-                            submissionTime: submissionTime, responseTime: responseTime,
-                            response: root?.ClientResponses?.Response, responserName: root?.ClientResponses?.Name,
 
+                if (author && product) {
+                    Date submissionTime = format.parse(root.SubmissionTime)
+                    String text = root.ReviewText
+                    text.trim()
+                    Review review = new Review( author: author, product: product,review: text,
+                            rating: root.Rating, ratingRange: root.RatingRange,
+                            submissionTime: submissionTime
                     ).save()
+                    i++
+                    println i
                 }
 
                 readline = r.readLine()
             }
 
-            log.info Review.getAll().size()+" reviews imported !!"
+            println Review.getAll().size()+" reviews imported !!"
         }
     }
 }
