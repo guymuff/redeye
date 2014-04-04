@@ -33,27 +33,26 @@
                 <div class="pr-review-wrap">
                     <div class="pr-review-rating-wrapper">
                         <div class="everyone_review">
-                            <div class="pr-review-author-date" style="max-width:20%"><span style="font-size: x-large;">3.5 ${everyone_rating}/ 5.0</span> Over All</div>
+                            <div class="pr-review-author-date" style="max-width:20%"><span style="font-size: x-large;">${recommendProduct.overall_rating}/${recommendProduct.rating_range}</span> Over All</div>
                         </div>
                         <div class="targeted_review">
-                            <div class="pr-review-author-date" style="max-width:20%"><span style="font-size: x-large;font-weight: bold">4.5 ${everyone_rating}/ 5.0</span> Focused</div>
+                            <div class="pr-review-author-date" style="max-width:20%"><span style="font-size: x-large;font-weight: bold">${recommendProduct.personalized_rating}/${recommendProduct.rating_range}</span> Focused</div>
                         </div>
                         <div class="pr-review-rating">
                             <div class="pr-stars pr-stars-small pr-stars-4-sm" style="background-position: 0px -144px;" title="That's good stuff">&nbsp;</div>
-                            <p class="pr-review-rating-headline">This is the review title ${review_title}</p>
+                            <p class="pr-review-rating-headline">${recommendProduct.product_name}</p>
                         </div>
                     </div>
                     <div class="pr-review-author">
                         <div class="pr-review-author-info-wrapper">
-                            <r:img uri="http://ecx.images-amazon.com/images/I/71zV4cbdXcL._SL1500_.jpg"
-                                   alt="" height="280"/>
-                            <p class="pr-review-author-name">By&nbsp;<span>SOMEONE ${author}</span></p>
-                            <p class="pr-review-author-location">from <span>CA ${author_location}</span></p>
+                            <r:img uri="${recommendProduct.image_url}" alt="${recommendProduct.product_name}" height="280"/>
+                            <p class="pr-review-author-name">By&nbsp;<span>${recommendProduct.author}</span></p>
+                            <p class="pr-review-author-location">from <span>${recommendProduct.author_location}</span></p>
                         </div>
                     </div>
                     <div class="pr-review-main-wrapper">
                         <div class="pr-review-text">
-                            <p class="pr-comments-header">Comments about <em><span class="pr-product-name">This is product name ${product_name}</span></em>:</p>
+                            <p class="pr-comments-header"> ${recommendProduct.review} <em><span class="pr-product-name"></span></em>:</p>
                         </div>
                         <div class="pr-review-footer">
                             <div class="pr-review-tools">
