@@ -1,5 +1,8 @@
 package redeye
 
+import java.math.MathContext
+import java.math.RoundingMode
+
 class HomeController {
 
     def recommendService
@@ -16,7 +19,7 @@ class HomeController {
         def userId = params.UserIdInput
         Author input_user = Author.findById(Integer.parseInt(userId))
 
-        /**
+
         Map<RecommenderService.ProductRecommendation, List<Review> > res = recommendService.getProductAndReviews(input_user)
 
 
@@ -24,10 +27,14 @@ class HomeController {
             RecommenderService.ProductRecommendation pr, List<Review> reviewList ->
                 Review review = reviewList.pop()
                 Product product = Product.findById(pr.productID)
+                BigDecimal overall = product.overall_rating.setScale(1, RoundingMode.CEILING)
+                BigDecimal range = product.rating_range.setScale(1, RoundingMode.CEILING)
+                BigDecimal estimate =((BigDecimal) pr.starRatingEstimate).setScale(1, RoundingMode.CEILING)
+
                 productBundleList.add(new ProductBundle(
-                        overall_rating: product.overall_rating,
-                        rating_range: product.rating_range,
-                        personalized_rating: pr.starRatingEstimate,
+                        overall_rating: overall,
+                        rating_range: range,
+                        personalized_rating: estimate,
                         author:review.author.nickName,
                         author_location:review.author.location,
                         author_gender:review.author.gender,
@@ -38,7 +45,7 @@ class HomeController {
 
         }
 
-        **/
+        /**
         ProductBundle pb = new ProductBundle(overall_rating: 4.3,
         rating_range: 5.0,
         personalized_rating: 4.2,
@@ -49,7 +56,7 @@ class HomeController {
         product_name: 'Deodorant',
         image_url: 'http://www.dove.us/TD/Images/WhiteHouse_Medium_118x214_0008_Deo_Revive71-715974.png')
         productBundleList.add(pb)
-
+        **/
         model['productbundle'] = productBundleList
         model['input_user'] = input_user
         render(view:"recommended",model:model)
