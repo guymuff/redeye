@@ -44,7 +44,7 @@ class RecommenderService {
         return ret
     }
 
-    class ProductRecommendation {
+    static class ProductRecommendation {
         long productID
         float starRatingEstimate
     }
