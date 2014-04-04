@@ -106,7 +106,6 @@ class ImportDataService {
                         SoftThreadLocalMap propertyInstanceMap = DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
                         propertyInstanceMap.get().clear()
                     }
-                    println i
                 }
 
                 readline = r.readLine()
