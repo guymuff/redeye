@@ -8,7 +8,7 @@
 
 <body>
 
-<h1 style="padding-left: 1em; font-size: 40px">Recommended Products</h1>
+<h1 style="padding-left: 1em; padding-top: 1em; font-size: 40px">Recommended Products</h1>
 
 <div class="pr-contents-wrapper">
 
