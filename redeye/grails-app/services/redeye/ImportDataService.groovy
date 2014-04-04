@@ -24,6 +24,7 @@ class ImportDataService {
             String readline = r.readLine()
 
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+            int i = 0
             while(readline) {
                 JSONObject root = slurper.parseText(readline)
 
@@ -33,6 +34,16 @@ class ImportDataService {
                         gender: root?.ContextDataValues?.Gender?.Value, location: root['Location'],
                         lastModeratedTime: lastModified, submissionTime: submissionTime
                 ).save()
+
+                i++
+
+                if(i%100 == 0) {
+                    Session session = sessionFactory.getCurrentSession()
+                    session.flush()
+                    session.clear()
+                    SoftThreadLocalMap propertyInstanceMap = DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
+                    propertyInstanceMap.get().clear()
+                }
 
                 readline = r.readLine()
             }
