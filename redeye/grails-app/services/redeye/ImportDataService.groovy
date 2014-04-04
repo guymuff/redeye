@@ -1,7 +1,10 @@
 package redeye
 
 import groovy.json.JsonSlurper
+import org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin
+import org.codehaus.groovy.grails.support.SoftThreadLocalMap
 import org.codehaus.groovy.grails.web.json.JSONObject
+import org.hibernate.Session
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -11,6 +14,8 @@ class ImportDataService {
     static String AUTHOR_TEXT = 'dove/authors.txt'
     static String PRODUCT_TEXT = 'dove/products.txt'
     static String REVIEW_TEXT = 'dove/reviews.txt'
+
+    def sessionFactory
 
     def importAuthor() {
         if (Author.findAll().size() == 0) {
@@ -93,7 +98,14 @@ class ImportDataService {
                             submissionTime: submissionTime
                     ).save()
                     i++
-                    println i
+
+                    if(i%100 == 0) {
+                        Session session = sessionFactory.getCurrentSession()
+                        session.flush()
+                        session.clear()
+                        SoftThreadLocalMap propertyInstanceMap = DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
+                        propertyInstanceMap.get().clear()
+                    }
                 }
 
                 readline = r.readLine()
