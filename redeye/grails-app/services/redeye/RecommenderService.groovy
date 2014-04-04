@@ -23,7 +23,7 @@ class RecommenderService {
         recommender = new GenericUserBasedRecommender(model, neighborhood, similarity);
     }
 
-    long[] recommendSimilarUsers(long authorId, int numOfSimilarAuthors) {
+    long[] recommendSimilarAuthors(long authorId, int numOfSimilarAuthors) {
         return recommender.mostSimilarUserIDs(authorId, numOfSimilarAuthors)
     }
 
