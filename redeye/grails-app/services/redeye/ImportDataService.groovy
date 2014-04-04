@@ -1,7 +1,10 @@
 package redeye
 
 import groovy.json.JsonSlurper
+import org.codehaus.groovy.grails.plugins.DomainClassGrailsPlugin
+import org.codehaus.groovy.grails.support.SoftThreadLocalMap
 import org.codehaus.groovy.grails.web.json.JSONObject
+import org.hibernate.Session
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -11,6 +14,8 @@ class ImportDataService {
     static String AUTHOR_TEXT = 'dove/authors.txt'
     static String PRODUCT_TEXT = 'dove/products.txt'
     static String REVIEW_TEXT = 'dove/reviews.txt'
+
+    def sessionFactory
 
     def importAuthor() {
         if (Author.findAll().size() == 0) {
@@ -32,7 +37,7 @@ class ImportDataService {
                 readline = r.readLine()
             }
 
-            log.info Author.getAll().size()+" authors imported !!"
+            println Author.getAll().size()+" authors imported !!"
         }
     }
 
@@ -77,24 +82,36 @@ class ImportDataService {
             String readline = r.readLine()
 
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
-
+            int i = 0
             while(readline) {
                 JSONObject root = slurper.parseText(readline)
 
                 Author author = Author.findByIdString(root.AuthorId)
                 Product product = Product.findByProduct_id(root.ProductId)
+
                 if (author && product) {
                     Date submissionTime = format.parse(root.SubmissionTime)
-                    Review review = new Review( author: author, product: product,review: root.ReviewText,
+                    String text = root.ReviewText
+                    text.trim()
+                    Review review = new Review( author: author, product: product,review: text,
                             rating: root.Rating, ratingRange: root.RatingRange,
                             submissionTime: submissionTime
                     ).save()
+                    i++
+
+                    if(i%100 == 0) {
+                        Session session = sessionFactory.getCurrentSession()
+                        session.flush()
+                        session.clear()
+                        SoftThreadLocalMap propertyInstanceMap = DomainClassGrailsPlugin.PROPERTY_INSTANCE_MAP
+                        propertyInstanceMap.get().clear()
+                    }
                 }
 
                 readline = r.readLine()
             }
 
-            log.info Review.getAll().size()+" reviews imported !!"
+            println Review.getAll().size()+" reviews imported !!"
         }
     }
 }
