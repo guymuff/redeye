@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat
 class ImportDataService {
 
     static String AUTHOR_TEXT = 'dove/authors.txt'
+    static String PRODUCT_TEXT = 'dove/products.txt'
     static String REVIEW_TEXT = 'dove/reviews.txt'
 
     def importAuthor() {
@@ -35,6 +36,31 @@ class ImportDataService {
         }
     }
 
+    def importProduct() {
+        if (Product.findAll().size() == 0) {
+            JsonSlurper slurper = new JsonSlurper()
+            Reader r = new FileReader(PRODUCT_TEXT)
+            String readline = r.readLine()
+
+            while(readline) {
+                JSONObject root = (JSONObject) slurper.parseText(readline)
+                JSONObject ratings = (JSONObject) root['ReviewStatistics']
+                if(root['Name'] && root['Id']){
+                    Product product = new Product(
+                            name: root['Name'],
+                            image_url:root['ImageUrl'],
+                            product_url:root['ProductPageUrl'],
+                            category_id: root['CategoryId'],
+                            product_id: root['Id'],
+                            overall_rating: ratings['AverageOverallRating'],
+                            rating_range: ratings['OverallRatingRange'])
+                    product.save()
+                }
+                readline = r.readLine()
+            }
+        }
+    }
+
     def listAllAuthorNameAndId() {
 
         List<Author> authors = Author.getAll()
@@ -51,21 +77,17 @@ class ImportDataService {
             String readline = r.readLine()
 
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+
             while(readline) {
                 JSONObject root = slurper.parseText(readline)
 
                 Author author = Author.findByIdString(root.AuthorId)
-                Product product = Product.findByProductId(root.ProductId)
+                Product product = Product.findByProduct_id(root.ProductId)
                 if (author && product) {
-                    Date responseTime = null
-                    if (root.ClientResponses?.Date)
-                        responseTime = format.parse(root.ClientResponses?.Date)
                     Date submissionTime = format.parse(root.SubmissionTime)
-                    Review review = new Review( author: author, product: product,
+                    Review review = new Review( author: author, product: product,review: root.ReviewText,
                             rating: root.Rating, ratingRange: root.RatingRange,
-                            submissionTime: submissionTime, responseTime: responseTime,
-                            response: root?.ClientResponses?.Response, responserName: root?.ClientResponses?.Name,
-
+                            submissionTime: submissionTime
                     ).save()
                 }
 
